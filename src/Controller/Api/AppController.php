@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\Network\Email\Email;
 use Cake\ORM\TableRegistry;
 use Firebase\JWT\JWT;
+use Cake\Routing\Router;
 
 class AppController extends Controller
 {
@@ -45,7 +46,7 @@ class AppController extends Controller
         }
     }
 
-	public function __require_fields($required){
+		public function __require_fields($required){
         $empty_fields = [];
         foreach($required as $key=>$val){
             if($val == ''){
@@ -53,6 +54,27 @@ class AppController extends Controller
             }
         }
         return $empty_fields;
+    }
+
+		public function getSiteUrl(){
+      $url = Router::url('/', TRUE);
+      return $url;
+    }
+
+		function sent_email($to=array(),$data=array()){
+        $sender='ITIS4RENT';
+        $CakeEmail = new Email('default');
+        $from = 'randhirjha2212@gmail.com';
+        $CakeEmail->template($data['template_name'], 'default')
+                    ->emailFormat('html')
+                    ->to($to)
+                    ->from([$from => $sender])
+                    ->subject($data['subject'])
+                    ->viewVars(compact('data'));
+            if (@$CakeEmail->send()) {
+                return true;
+            }
+        return false;
     }
 
 

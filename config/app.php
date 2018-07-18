@@ -180,24 +180,24 @@ return [
          'default' => [
              'className' => 'Smtp',
              // The following keys are used in SMTP transports
-             'host' => 'mail.citysavvy.com.au',
-             'port' => 25,
-             'timeout' => 60,
-             'username' => 'demo@citysavvy.com.au',
-             'password' => 'citysavvy949239#4Rj',
+             'host' => 'smtp.gmail.com',
+             'port' => 587,
+             'timeout' => 30,
+             'username' => 'test.itis4rent@gmail.com',
+             'password' => 'itis4rent2212',
              'client' => null,
-             'tls' => FALSE,
+             'tls' => TRUE,
          ],
          'test@abc.com' => [
              'className' => 'Smtp',
              // The following keys are used in SMTP transports
-             'host' => 'mail.citysavvy.com.au',
+             'host' => 'smtp.gmail.com',
              'port' => 587,
              'timeout' => 30,
-             'username' => 'demo@citysavvy.com.au',
-             'password' => 'citysavvy949239#4Rj',
+             'username' => 'test.itis4rent@gmail.com',
+             'password' => 'itis4rent2212',
              'client' => null,
-             'tls' => FALSE,
+             'tls' => TRUE,
          ]
      ],
      'Email' => [

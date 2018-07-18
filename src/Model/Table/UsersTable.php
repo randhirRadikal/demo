@@ -52,4 +52,22 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    public function emailCheck($email){
+      $query = $this->find('all',[
+          'conditions' => ['Users.email =' => $email]
+      ]);
+      return $query->count();
+    }
+
+    public function updateFcmToken($userId,$fcmToken){
+      $query = $this->query();
+        $query->update()
+          ->set(['fcm_token' => $fcmToken])
+          ->where(['id' => $userId])
+          ->execute();
+      return true;
+    }
+
+
 }
