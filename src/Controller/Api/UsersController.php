@@ -74,18 +74,24 @@ class UsersController extends AppController
 			$required['password'] = isset($data['password'])?$data['password']:'';
 			$required['name'] = isset($data['name'])?$data['name']:'';
 			$required['type'] = isset($data['type'])?$data['type']:'';
-			$required['phone_number'] = isset($data['phone_number'])?$data['phone_number']:'';
-			$required['address'] = isset($data['address'])?$data['address']:'';
-			$required['city'] = isset($data['city'])?$data['city']:'';
-			$required['state'] = isset($data['state'])?$data['state']:'';
-			$required['pincode'] = isset($data['pincode'])?$data['pincode']:'';
+			$required['phone_number'] = isset($data['mobile'])?$data['mobile']:'';
+			$required['address'] = isset($data['thoroughfare'])?$data['thoroughfare']:'';
+			$required['city'] = isset($data['locality'])?$data['locality']:'';
+			$required['state'] = isset($data['administrativeArea'])?$data['administrativeArea']:'';
+			$required['pincode'] = isset($data['postalCode'])?$data['postalCode']:'';
+			$required['country'] = isset($data['countryName'])?$data['countryName']:'';
 			$blank_field = $this->__require_fields($required);
 			if (count($blank_field)>0){
 				$error_message = 'Please enter required field.';
 			}else{
 				if($this->Users->emailCheck($data['email']) == 0){
+					if($required['type'] == 1){
+						$required['type'] = "Contractor";
+					}else if($required['type'] == 2){
+						$required['type'] = "Owner";
+					}
 					$user = $this->Users->newEntity();
-					$user = $this->Users->patchEntity($user, $data);
+					$user = $this->Users->patchEntity($user, $required);
 					if ($this->Users->save($user)) {
 						$error_code = 0;
 						$error_message = 'Successfully registered.';
