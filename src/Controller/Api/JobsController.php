@@ -99,6 +99,7 @@ class JobsController extends AppController
 	        $error_message = 'Please enter required field.';
 	    }else{
 				$job = $this->Jobs->get($data['job_id']);
+				$data['status'] = "Pending";
 				$job = $this->Jobs->patchEntity($job, $data);
 				if($this->Jobs->save($job)){
 					$error_code = 0;
@@ -114,39 +115,147 @@ class JobsController extends AppController
 					'_serialize' => ['error_code','error_message']]);
 	}
 
-	public function addJobs(){
+	public function historyJobs(){
+		$error_code = 1;
+		$error_message = "You are not valied user.";
+		$result = [];
+		if($this->Auth->user('type') == 'Contractor'){
+			$result = $this->Jobs->find('all')
+				->where(['Jobs.status'=>'Completed'])
+				->contain(['Bids' => function(\Cake\ORM\Query $q) {
+			        	return $q->where(['Bids.created_by' => $this->Auth->user('id')]);
+			    	}])
+				->toArray();
+			$error_code = 0;
+			$error_message = 'Successfully1.';
+		}else if($this->Auth->user('type') == 'Owner'){
+			$result = $this->Jobs->find('all')->where(['Jobs.user_id'=>$this->Auth->user('id'),'Jobs.status'=>'Completed'])->toArray();
+			$error_code = 0;
+			$error_message = 'Successfully2.';
+		}else if($this->Auth->user('type') == 'PremiumContractor'){
+			$result = $this->Jobs->find('all')->where(['Jobs.user_id'=>$this->Auth->user('id')])->toArray();
+			$error_code = 0;
+			$error_message = 'Successfully3.';
+		}
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
+	}
+
+	public function pendingQuotes(){
+		$error_code = 0;
+		$error_message="Successfully";
+		$result = $this->Jobs->find('all')
+			->where(['Jobs.status'=>'Pending','Jobs.user_id'=>$this->Auth->user('id')])
+			->contain(['Bids' => function($q) {
+			    $q->select([
+					'Bids.job_id',
+			        'totalBids' => $q->func()->count('Bids.job_id')
+			    ])
+				->group(['Bids.job_id']);
+			    return $q;
+			}])->toArray();
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
+	}
+
+	public function pendingQuotesBids(){
 		$error_code = 1;
 		$error_message = "This is post method";
+		$result = [];
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->data;
-			$required['email'] = isset($data['email'])?$data['email']:'';
-			$required['password'] = isset($data['password'])?$data['password']:'';
-			$required['name'] = isset($data['name'])?$data['name']:'';
-			$required['type'] = isset($data['type'])?$data['type']:'';
-			$required['phone_number'] = isset($data['phone_number'])?$data['phone_number']:'';
-			$required['username'] = isset($data['username'])?$data['username']:'';
+			$required['job_id'] = isset($data['job_id'])?$data['job_id']:'';
 			$blank_field = $this->__require_fields($required);
 		    if (count($blank_field)>0){
 		        $error_message = 'Please enter required field.';
 		    }else{
-				if($this->Users->emailCheck($data['email']) == 0){
-		          	$user = $this->Users->newEntity();
-		            $user = $this->Users->patchEntity($user, $data);
-		            if ($this->Users->save($user)) {
-						$error_code = 0;
-  	  					$error_message = 'Successfully registered.';
-		            } else {
-		              $error_message = "The user could not be saved, Please, try again.";
-		            }
-		        }else{
-		          $error_message = "Email already exists";
-		        }
+				$result = $this->Jobs->find('all')
+					->select(['Jobs.id', 'Jobs.title'])
+					->where(['Jobs.id'=>$data['job_id'],'Jobs.user_id'=>$this->Auth->user('id')])
+					->contain([
+						'Bids' => [
+					        'fields' => [
+					            'Bids.id',
+					            'Bids.created_by',
+					            'Bids.job_id',
+								'Bids.amount'
+					        ],
+					        'Users' => [
+					            'fields' => [
+					                'Users.id',
+					                'Users.name'
+					            ]
+					        ]
+					    ]
+					])->first();
+				$error_code = 0;
+				$error_message="Successfully";
 			}
 		}
 		$this->set(["error_code"=>$error_code,
 					"error_message"=>$error_message,
-					'_serialize' => ['error_code','error_message']]);
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
 	}
+
+	public function pendingQuotesBidProfile(){
+		$error_code = 1;
+		$error_message = "This is post method";
+		$result = [];
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$data = $this->request->data;
+			$required['user_id'] = isset($data['user_id'])?$data['user_id']:'';
+			$blank_field = $this->__require_fields($required);
+		    if (count($blank_field)>0){
+		        $error_message = 'Please enter required field.';
+		    }else{
+				$usersTable = TableRegistry::get('Users');
+				//$jobsTable = TableRegistry::get('Jobs');
+				$result = $usersTable->find('all')
+					->select(['Users.id','Users.name'])
+					->where(['id'=>$data['user_id']])
+					->contain(['Bids'=> function($q) {
+					    $q->select([
+							'Bids.created_by','Bids.job_id',
+					        'totalBids' => $q->func()->count('Bids.created_by')
+					    ])
+						->group(['Bids.created_by']);
+					    return $q;
+					}])
+					->first();
+				$result['job'] = $this->Jobs->find('all')
+					->select(['Jobs.id','Jobs.user_id','Jobs.title','Reviews.id','Reviews.description','Reviews.ratting'])
+					->where(['Jobs.user_id'=>$result['bids'][0]['created_by']])
+					->contain(['Reviews'])
+					->order(['Jobs.id'=>'DESC'])
+					->first();
+				$result['bids'] = $result['bids'][0];
+				$error_code = 0;
+				$error_message="Successfully";
+			}
+		}
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
+	}
+
+	public function acceptQuotes(){
+		$error_code = 0;
+		$error_message="Successfully";
+		$result = $this->Jobs->find('all')
+			->where(['Jobs.status'=>'Started','Jobs.user_id'=>$this->Auth->user('id')])
+			->toArray();
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
+	}
+
 
 	public function bidsLists(){
 		$error_code = 1;
@@ -208,6 +317,8 @@ class JobsController extends AppController
 					"result"=>$result,
 					'_serialize' => ['error_code','error_message','result']]);
 	}
+
+
 
 
 }

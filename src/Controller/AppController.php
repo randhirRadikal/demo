@@ -61,6 +61,16 @@ class AppController extends Controller
         return false;
     }
 
+	public function __require_fields($required){
+		$empty_fields = [];
+		foreach($required as $key=>$val){
+			if($val == ''){
+				$empty_fields[$key] = $val;
+			}
+		}
+		return $empty_fields;
+	}
+
     public function __upload_file($pic,$target_path) {
         if ($pic['type'] == 'image/jpeg' || $pic['type'] == 'image/png' || $pic['type']== 'image/gif') {
             $ext = explode('.', $pic['name']);

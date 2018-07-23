@@ -249,7 +249,7 @@ return [
             'timezone' => 'UTC',
             'flags' => [],
             'cacheMetadata' => true,
-            'log' => false,
+            'log' => true,
 
             /**
              * Set identifier quoting to true if you are using reserved words or
@@ -313,6 +313,12 @@ return [
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
             'url' => env('LOG_ERROR_URL', null),
         ],
+		'queries' => [
+	        'className' => 'File',
+	        'path' => LOGS,
+	        'file' => 'queries.log',
+	        'scopes' => ['queriesLog']
+	    ]
     ],
 
     /**

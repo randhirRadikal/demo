@@ -60,7 +60,7 @@
 											<?= $value['status'] ?>
 										</td>
 										<td>
-
+											<i class="fa fa-times" style="color:red;"></i>
 										</td>
 
 									</tr>

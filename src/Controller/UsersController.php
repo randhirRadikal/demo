@@ -41,60 +41,22 @@ class UsersController extends AppController
         $this->set('_serialize', ['Users','menu']);
     }
 
-    public function add()
-    {
-        $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+    public function overview(){
+		$jobsTable = TableRegistry::get('Jobs');
+		$Query =  $jobsTable->find('all');
+		$Query->select([
+		  	'id','status',
+		  	'count' => $Query->func()->count('*')
+		])
+		->group(['Jobs.type']);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
-    }
-
-    public function edit($id = null)
-    {
-        if(!$this->isAuthorized()){
-          return $this->redirect(['action' => 'login']);
-        }
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
-    }
-
-    public function delete($id = null)
-    {
-        if(!$this->isAuthorized()){
-          return $this->redirect(['action' => 'login']);
-        }
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
+		foreach ($Query as $key => $value) {
+			pr($value);
+		}
+		$menu = ["menu"=>"","menu_type"=>"overview"];
+		$this->set(compact('Users','menu'));
+        $this->set('_serialize', ['Users','menu']);
+	}
 
     public function login()
     {

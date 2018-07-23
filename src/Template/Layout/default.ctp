@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<title>QuickFix Admin</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1" name="viewport" />
-	<meta content="Preview page of Metronic Admin Theme #4 for managed datatable samples" name="description" />
-	<meta content="" name="author" />
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN THEME GLOBAL STYLES -->
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-	<!-- END THEME GLOBAL STYLES -->
-	<!-- BEGIN THEME LAYOUT STYLES -->
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
-	<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
-	<!-- END THEME LAYOUT STYLES -->
-	<link rel="shortcut icon" href="favicon.ico" /> </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>QuickFix Admin</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="Preview page of Metronic Admin Theme #4 for managed datatable samples" name="description" />
+		<meta content="" name="author" />
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+		<!-- END GLOBAL MANDATORY STYLES -->
+		<!-- BEGIN PAGE LEVEL PLUGINS -->
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+		<!-- END PAGE LEVEL PLUGINS -->
+		<!-- BEGIN THEME GLOBAL STYLES -->
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+		<!-- END THEME GLOBAL STYLES -->
+		<!-- BEGIN THEME LAYOUT STYLES -->
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $this->Url->build('/', TRUE); ?>assets/customs/circliful/jquery.circliful.css" rel="stylesheet" type="text/css" />
+		<!-- END THEME LAYOUT STYLES -->
+		<link rel="shortcut icon" href="favicon.ico" />
+
+		<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+	</head>
 	<!-- END HEAD -->
 
 	<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
@@ -78,8 +82,8 @@
 									</a>
 								</li>
 								<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
-									<a href="javascript:;" class="dropdown-toggle">
-										<span class="badge"> Overview </span>
+									<a href="<?php echo $this->Url->build('/', TRUE); ?>users/overview" class="dropdown-toggle">
+										<span class="badge <?= ($menu['menu_type']=="overview")?"badge-success":""; ?>"> Overview </span>
 									</a>
 								</li>
 								<li class="dropdown dropdown-user dropdown-dark">
@@ -131,7 +135,7 @@
 											<li class="nav-item start <?= ($menu['menu']=="jobyet_jobs")?"active":""; ?>">
 												<a href="<?php echo $this->Url->build('/', TRUE); ?>jobs/jobYet" class="nav-link ">
 
-													<span class="title">JobYet Jobs</span>
+													<span class="title">Jobs Yet Awarded</span>
 												</a>
 											</li>
 											<li class="nav-item start <?= ($menu['menu']=="pending_jobs")?"active":""; ?>">
@@ -213,7 +217,6 @@
 						</div>
 						<!-- END FOOTER -->
 						<!-- BEGIN CORE PLUGINS -->
-						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
 						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -228,10 +231,11 @@
 						<!-- END PAGE LEVEL PLUGINS -->
 						<!-- BEGIN THEME GLOBAL SCRIPTS -->
 						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/global/scripts/app.min.js" type="text/javascript"></script>
+						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/customs/circliful/jquery.circliful.min.js" type="text/javascript"></script>
 						<!-- END THEME GLOBAL SCRIPTS -->
 						<!-- BEGIN PAGE LEVEL SCRIPTS -->
-						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/scripts/profile.min.js" type="text/javascript"></script>
-						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+						<!-- <script src="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/scripts/profile.min.js" type="text/javascript"></script>
+						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script> -->
 						<!-- END PAGE LEVEL SCRIPTS -->
 						<!-- BEGIN THEME LAYOUT SCRIPTS -->
 						<script src="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>

@@ -22,6 +22,11 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
 			'joinType' => 'INNER'
         ]);
+
+		$this->hasMany('Bids', [
+            'foreignKey' => 'created_by',
+			'joinType' => 'INNER'
+        ]);
     }
 
     public function validationDefault(Validator $validator)

@@ -31,13 +31,11 @@
 							<thead>
 								<tr>
 									<th> ID </th>
-									<th> Date Posted </th>
-									<th> Job Title </th>
-									<th> Homeowner / Premium Contractor </th>
+									<th> Project Title </th>
 									<th> Contractor </th>
 									<th> Type </th>
-									<th> Budget </th>
-									<th> Confirmed Bid Amount </th>
+									<th> Bid Amount </th>
+									<th> Reason </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -46,25 +44,19 @@
 										<tr class="odd gradeX">
 											<td> <?= $value['id'] ?> </td>
 											<td>
-												<?= $value['created'] ?>
-											</td>
-											<td>
 												<?= $value['title'] ?>
 											</td>
 											<td>
 												<?= $value['user']['name'] ?>
 											</td>
 											<td>
-												<?= $value['bid']['user']['name'] ?>
+												<?= $value['type']?>
 											</td>
 											<td>
-												<?= $value['type'] ?>
+												-
 											</td>
 											<td>
-												$ <?= $value['budget'] ?>
-											</td>
-											<td>
-												$ <?= $value['bid']['amount'] ?>
+												<?= $value['reason'] ?>
 											</td>
 										</tr>
 									<?php } ?>

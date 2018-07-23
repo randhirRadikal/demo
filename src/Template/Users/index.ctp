@@ -60,14 +60,14 @@
 											<?= $value['status'] ?>
 										</td>
 										<td>
-
+											<i class="fa fa-times" style="color:red;"></i>
 										</td>
 
 									</tr>
 								<?php } ?>
 							<?php }else{ ?>
 								<tr class="odd gradeX">
-									<td colspan="6">
+									<td colspan="7">
 										<span class="text-danger">No record found</span>
 									</td>
 								</tr>

@@ -59,7 +59,8 @@
 											<?= $value['user']['name'] ?>
 										</td>
 										<td>
-											<?= $value['bid']['user']['name'] ?>
+											<p style="margin:0px;"><?= $value['bids'][0]['user']['name'] ?></p>
+											<p style="margin:0px;"><?= $value['bids'][0]['user']['company_name'] ?></p>
 										</td>
 										<td>
 											<?= $value['type'] ?>
@@ -68,7 +69,7 @@
 											$ <?= $value['budget'] ?>
 										</td>
 										<td>
-											$ <?= $value['bid']['payment']['amount'] ?>
+											$ <?= $value['bids'][0]['payment']['amount'] ?>
 										</td>
 									</tr>
 								<?php } ?>

@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 class JobsController extends AppController
 {
@@ -21,25 +22,84 @@ class JobsController extends AppController
 
     public function newPosts($id = null)
     {
-        $newJobs = $this->Jobs->find('all')->toArray();
+		$JobTemp = $this->Jobs->find('all')
+			->where(['Jobs.status'=>'Pending'])
+			->contain(['Bids','Users'])
+			->toArray();
+		$Jobs = [];
+		foreach ($JobTemp as $key => $value) {
+			if(count($value['bids'])==0){
+				array_push($Jobs,$value);
+			}
+		}
 		$menu = ["menu"=>"newposted_jobs","menu_type"=>"job"];
-		$this->set(compact('newJobs','menu'));
-        $this->set('_serialize', ['newJobs','menu']);
+		$this->set(compact('Jobs','menu'));
+        $this->set('_serialize', ['Jobs','menu']);
     }
 
-	public function jobYet($id = null)
-    {
-        $newJobs = $this->Jobs->find('all')->toArray();
+	public function jobYet(){
+        $Jobs = $this->Jobs->find('all')
+			->where(['Jobs.status'=>'Pending'])
+			->contain(['Bids','Users'])
+			->toArray();
 		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job"];
-		$this->set(compact('newJobs','menu'));
-        $this->set('_serialize', ['newJobs','menu']);
+		$this->set(compact('Jobs','menu'));
+        $this->set('_serialize', ['Jobs','menu']);
     }
 
-	public function pending($id = null)
-    {
-        $Jobs = $this->Jobs->find('all')->where(['Jobs.status'=>'Pending'])->contain(['Bids'=>['Users'],'Users'])->toArray();
-		// pr($Jobs);
+	public function bidsDetails($jobId = null){
+		$reviewsTable = TableRegistry::get('Reviews');
+		$Jobs = $this->Jobs->find('all')
+			->where(['Jobs.id'=>$jobId])
+			->contain(['Bids'=>['Users']])
+			->first();
+		$lowestBid = false;
+		$lowestBidValue = false;
+		$Bids = [];
+		foreach ($Jobs['bids'] as $key => $value) {
+			if($lowestBid){
+				if($lowestBid > $value['amount']){
+					$lowestBid = $value['amount'];
+					$lowestBidValue = $value;
+				}
+			}else{
+				$lowestBid = $value['amount'];
+				$lowestBidValue = $value;
+			}
+		}
+		$Bids['details'] = $lowestBidValue;
+		$Bids['reviews'] = $reviewsTable->find('all')->where(['created_for'=>$lowestBidValue['created_by']])->toArray();
+		$Bids['lastJob'] = $this->Jobs->find('all')->contain(['Bids'])->order(['Jobs.id'=>'DESC'])->first();
+		// pr($lowestBidValue);
 		// exit;
+		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job"];
+		$this->set(compact('Jobs','Bids','menu'));
+        $this->set('_serialize', ['Jobs','Bids','menu']);
+	}
+
+	public function pending($id = null){
+        $Jobs = $this->Jobs->find('all')
+			->select(['Jobs.id','Jobs.status','Jobs.created','Jobs.title','Jobs.budget','Jobs.type','Jobs.user_id','Users.name','Users.company_name'])
+			->where(['Jobs.status'=>'Started'])
+			->contain(['Bids' => [
+				'fields' => [
+					'Bids.id',
+					'Bids.created_by',
+					'Bids.job_id',
+					'Bids.amount',
+					'Bids.status'
+				],
+				'conditions' =>[
+					'Bids.status'=>'Approved'
+				],
+				'Users' => [
+					'fields' => [
+						'Users.id',
+						'Users.name','Users.company_name'
+					]
+				]
+			],'Users'])
+			->toArray();
 		$menu = ["menu"=>"pending_jobs","menu_type"=>"job"];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
@@ -47,7 +107,35 @@ class JobsController extends AppController
 
 	public function completed($id = null)
     {
-		$Jobs = $this->Jobs->find('all')->where(['Jobs.status'=>'Completed'])->contain(['Bids'=>['Users','Payments'],'Users'])->toArray();
+		$Jobs = $this->Jobs->find('all')
+			->select(['Jobs.id','Jobs.status','Jobs.created','Jobs.completed_date','Jobs.title','Jobs.budget','Jobs.type','Jobs.user_id','Users.name','Users.company_name'])
+			->where(['Jobs.status'=>'Completed'])
+			->contain(['Bids' => [
+				'fields' => [
+					'Bids.id',
+					'Bids.created_by',
+					'Bids.job_id',
+					'Bids.amount',
+					'Bids.status'
+				],
+				'conditions' =>[
+					'Bids.status'=>'Approved'
+				],
+				'Users' => [
+					'fields' => [
+						'Users.id',
+						'Users.name',
+						'Users.company_name'
+					]
+				],
+				'Payments' => [
+					'fields' => [
+						'Payments.id',
+						'Payments.amount'
+					]
+				]
+			],'Users'])
+			->toArray();
 		// pr($Jobs);
 		// exit;
 

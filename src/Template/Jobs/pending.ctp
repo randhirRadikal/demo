@@ -32,7 +32,7 @@
 							<tr>
 								<th> ID </th>
 								<th> Date Posted </th>
-								<th> Job Title </th>
+								<th> Project Title </th>
 								<th> Homeowner / Premium Contractor </th>
 								<th> Contractor </th>
 								<th> Type </th>
@@ -55,7 +55,7 @@
 											<?= $value['user']['name'] ?>
 										</td>
 										<td>
-											<?= $value['bid']['user']['name'] ?>
+											<?= $value['bids'][0]['user']['name'] ?>
 										</td>
 										<td>
 											<?= $value['type'] ?>
@@ -64,7 +64,7 @@
 											$ <?= $value['budget'] ?>
 										</td>
 										<td>
-											$ <?= $value['bid']['amount'] ?>
+											$ <?= $value['bids'][0]['amount'] ?>
 										</td>
 									</tr>
 								<?php } ?>

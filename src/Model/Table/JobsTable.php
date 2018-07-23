@@ -16,14 +16,20 @@ class JobsTable extends Table {
         $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-		$this->hasOne('Bids', [
+		$this->hasMany('Bids', [
             'foreignKey' => 'job_id'
         ]);
 		$this->hasMany('JobImages', [
             'foreignKey' => 'job_id'
         ]);
+		$this->hasMany('JobMessages', [
+            'foreignKey' => 'job_id'
+        ]);
 		$this->belongsTo('Users', [
             'foreignKey' => 'user_id'
+        ]);
+		$this->hasOne('Reviews', [
+            'foreignKey' => 'job_id'
         ]);
     }
 
