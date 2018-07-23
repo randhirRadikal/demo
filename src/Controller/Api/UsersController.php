@@ -21,6 +21,11 @@ class UsersController extends AppController
 			if(isset($data['email']) && isset($data['password']) && isset($data['type'])){
 				$user = $this->Auth->identify();
 				if ($user) {
+				    if($data['type'] == 1){
+				        $data['type'] = "Contractor";
+				    }else if($data['type']){
+				        $data['type'] = "Owner";
+				    }
 					if($user['type'] == $data['type']){
 						if(isset($data['fcm_token'])){
 							$this->Users->updateFcmToken($user['id'],$data['fcm_token']);
@@ -124,11 +129,11 @@ class UsersController extends AppController
 					$user->verification_code= md5(Time::now().'-'.$user->email);
 					$this->Users->save($user);
 					$to = $user->email;
-          $mail_content['template_name'] = 'account_forgot_password';
-          $mail_content['subject'] = 'Randhir - Reset password';
-          $mail_content['first_name'] = $user->name;
-          $mail_content['reset_password_link'] = $this->getSiteUrl() ."change_password/".$user->verification_code;
-          $this->sent_email($to, $mail_content);
+                      $mail_content['template_name'] = 'account_forgot_password';
+                      $mail_content['subject'] = 'Randhir - Reset password';
+                      $mail_content['first_name'] = $user->name;
+                      $mail_content['reset_password_link'] = $this->getSiteUrl() ."change_password/".$user->verification_code;
+                      $this->sent_email($to, $mail_content);
 					$error_code = 0;
 					$error_message = "Please check your mail";
 				}else{

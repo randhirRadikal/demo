@@ -1,6 +1,4 @@
-<?php
-	pr($Users);
-?>
+
 <div class="page-content-wrapper">
 	<div class="page-content" style="margin-left:00px">
 		<!-- BEGIN PAGE BASE CONTENT -->
@@ -66,52 +64,45 @@
 	</div>
 </div>
 <script>
+var Replacement = "<?php echo $Users['type']['Replacement']; ?>";
+var Plumbing = "<?php echo $Users['type']['Plumbing']; ?>";
+var Electrical = "<?php echo $Users['type']['Electrical']; ?>";
+var Maintenance = "<?php echo $Users['type']['Maintenance']; ?>";
+var Others = "<?php echo $Users['type']['Others']; ?>";
 $( document ).ready(function() { // 6,32 5,38 2,34
 	$("#replacement-circle").circliful({
 		animationStep: 5,
         foregroundBorderWidth: 15,
         backgroundBorderWidth: 15,
-        percent: 50
+        percent: Replacement
 	});
 
 	$("#plumbing-circle").circliful({
 		animationStep: 5,
         foregroundBorderWidth: 15,
         backgroundBorderWidth: 15,
-        percent: 20
+        percent: Plumbing
 	});
 
 	$("#electrical-circle").circliful({
 		animationStep: 5,
         foregroundBorderWidth: 15,
         backgroundBorderWidth: 15,
-        percent: 18
+        percent: Electrical
 	});
 
 	$("#maintenance-circle").circliful({
 		animationStep: 5,
         foregroundBorderWidth: 15,
         backgroundBorderWidth: 15,
-        percent: 8
+        percent: Maintenance
 	});
 
 	$("#other-circle").circliful({
 		animationStep: 5,
         foregroundBorderWidth: 15,
         backgroundBorderWidth: 15,
-        percent: 4
+        percent: Others
 	});
-	/*
-		animation: 6,
-		animationStep: 5,
-		foregroundBorderWidth: 15,
-		backgroundBorderWidth: 15,
-		percent: 38,
-		textSize: 28,
-		textStyle: 'font-size: 12px;',
-		textColor: '#002699',
-		multiPercentage: 1,
-		percentages: [10, 20, 30]
-	*/
 });
 </script>

@@ -45,14 +45,28 @@ class UsersController extends AppController
 		$jobsTable = TableRegistry::get('Jobs');
 		$Query =  $jobsTable->find('all');
 		$Query->select([
-		  	'id','status',
+		  	'id','type',
 		  	'count' => $Query->func()->count('*')
 		])
 		->group(['Jobs.type']);
-
+        $Users['type'] = [
+            ];
+        $totalJobs = 0;
 		foreach ($Query as $key => $value) {
-			pr($value);
+			$Users['type'][$value['type']] = $value['count'];
+			$totalJobs += $value['count'];
 		}
+        // 		echo $totalJobs;
+        // 		pr($Users);
+
+		$Users['type']['Replacement'] = isset($Users['type']['Replacement'])?($Users['type']['Replacement']/$totalJobs*100):0;
+		$Users['type']['Plumbing'] = isset($Users['type']['Plumbing'])?($Users['type']['Plumbing']/$totalJobs*100):0;
+		$Users['type']['Electrical'] = isset($Users['type']['Electrical'])?($Users['type']['Electrical']/$totalJobs*100):0;
+		$Users['type']['Maintenance'] = isset($Users['type']['Maintenance'])?($Users['type']['Maintenance']/$totalJobs*100):0;
+		$Users['type']['Others'] = isset($Users['type']['Others'])?($Users['type']['Others']/$totalJobs*100):0;
+
+		// pr($Users);
+		// exit;
 		$menu = ["menu"=>"","menu_type"=>"overview"];
 		$this->set(compact('Users','menu'));
         $this->set('_serialize', ['Users','menu']);
