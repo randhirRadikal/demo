@@ -7319,3 +7319,183 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 92
 2018-07-25 21:33:34 Debug: duration=1 rows=2 SELECT Jobs.id AS `Jobs__id`, Jobs.user_id AS `Jobs__user_id`, Jobs.title AS `Jobs__title`, Jobs.urgency AS `Jobs__urgency`, Jobs.type AS `Jobs__type`, Jobs.description AS `Jobs__description`, Jobs.completed_date AS `Jobs__completed_date`, Jobs.job_type_id AS `Jobs__job_type_id`, Jobs.budget AS `Jobs__budget`, Jobs.address AS `Jobs__address`, Jobs.city AS `Jobs__city`, Jobs.state AS `Jobs__state`, Jobs.country AS `Jobs__country`, Jobs.pincode AS `Jobs__pincode`, Jobs.reason AS `Jobs__reason`, Jobs.created AS `Jobs__created`, Jobs.status AS `Jobs__status`, Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM jobs Jobs LEFT JOIN users Users ON Users.id = (Jobs.user_id) WHERE Jobs.status = 'Pending'
 2018-07-25 21:33:34 Debug: duration=1 rows=0 SELECT JobImages.id AS `JobImages__id`, JobImages.job_id AS `JobImages__job_id`, JobImages.image AS `JobImages__image`, JobImages.created AS `JobImages__created` FROM job_images JobImages WHERE JobImages.job_id in (:c0,:c1)
 2018-07-25 21:33:34 Debug: duration=0 rows=1 SELECT Bids.id AS `Bids__id`, Bids.job_id AS `Bids__job_id`, Bids.created AS `Bids__created`, Bids.amount AS `Bids__amount`, Bids.created_by AS `Bids__created_by`, Bids.status AS `Bids__status` FROM bids Bids WHERE Bids.job_id in (:c0,:c1)
+2018-07-26 04:28:15 Debug: duration=74 rows=21 SHOW FULL COLUMNS FROM `users`
+2018-07-26 04:28:15 Debug: duration=0 rows=1 SHOW INDEXES FROM `users`
+2018-07-26 04:28:15 Debug: duration=600 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'users' AND rc.TABLE_NAME = 'users'
+2018-07-26 04:28:15 Debug: duration=16 rows=1 SHOW TABLE STATUS WHERE Name = 'users'
+2018-07-26 04:28:16 Debug: duration=0 rows=1 SELECT Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM users Users WHERE Users.email = 'randhirjha2212@gmail.com' LIMIT 1
+2018-07-26 04:28:16 Debug: duration=64 rows=17 SHOW FULL COLUMNS FROM `jobs`
+2018-07-26 04:28:16 Debug: duration=16 rows=1 SHOW INDEXES FROM `jobs`
+2018-07-26 04:28:16 Debug: duration=74 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'jobs' AND rc.TABLE_NAME = 'jobs'
+2018-07-26 04:28:16 Debug: duration=0 rows=1 SHOW TABLE STATUS WHERE Name = 'jobs'
+2018-07-26 04:28:16 Debug: duration=16 rows=4 SHOW FULL COLUMNS FROM `job_images`
+2018-07-26 04:28:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `job_images`
+2018-07-26 04:28:16 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'job_images' AND rc.TABLE_NAME = 'job_images'
+2018-07-26 04:28:16 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'job_images'
+2018-07-26 04:28:16 Debug: duration=30 rows=6 SHOW FULL COLUMNS FROM `bids`
+2018-07-26 04:28:16 Debug: duration=0 rows=1 SHOW INDEXES FROM `bids`
+2018-07-26 04:28:16 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'bids' AND rc.TABLE_NAME = 'bids'
+2018-07-26 04:28:16 Debug: duration=2 rows=1 SHOW TABLE STATUS WHERE Name = 'bids'
+2018-07-26 04:28:16 Debug: duration=1 rows=2 SELECT Jobs.id AS `Jobs__id`, Jobs.user_id AS `Jobs__user_id`, Jobs.title AS `Jobs__title`, Jobs.urgency AS `Jobs__urgency`, Jobs.type AS `Jobs__type`, Jobs.description AS `Jobs__description`, Jobs.completed_date AS `Jobs__completed_date`, Jobs.job_type_id AS `Jobs__job_type_id`, Jobs.budget AS `Jobs__budget`, Jobs.address AS `Jobs__address`, Jobs.city AS `Jobs__city`, Jobs.state AS `Jobs__state`, Jobs.country AS `Jobs__country`, Jobs.pincode AS `Jobs__pincode`, Jobs.reason AS `Jobs__reason`, Jobs.created AS `Jobs__created`, Jobs.status AS `Jobs__status`, Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM jobs Jobs LEFT JOIN users Users ON Users.id = (Jobs.user_id) WHERE Jobs.status = 'Pending'
+2018-07-26 04:28:16 Debug: duration=0 rows=0 SELECT JobImages.id AS `JobImages__id`, JobImages.job_id AS `JobImages__job_id`, JobImages.image AS `JobImages__image`, JobImages.created AS `JobImages__created` FROM job_images JobImages WHERE JobImages.job_id in (:c0,:c1)
+2018-07-26 04:28:16 Debug: duration=0 rows=1 SELECT Bids.id AS `Bids__id`, Bids.job_id AS `Bids__job_id`, Bids.created AS `Bids__created`, Bids.amount AS `Bids__amount`, Bids.created_by AS `Bids__created_by`, Bids.status AS `Bids__status` FROM bids Bids WHERE Bids.job_id in (:c0,:c1)
+2018-07-26 04:30:33 Debug: duration=3 rows=21 SHOW FULL COLUMNS FROM `users`
+2018-07-26 04:30:33 Debug: duration=0 rows=1 SHOW INDEXES FROM `users`
+2018-07-26 04:30:33 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'users' AND rc.TABLE_NAME = 'users'
+2018-07-26 04:30:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'users'
+2018-07-26 04:30:33 Debug: duration=0 rows=1 SELECT Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM users Users WHERE Users.email = 'randhirjha2212@gmail.com' LIMIT 1
+2018-07-26 04:30:33 Debug: duration=2 rows=17 SHOW FULL COLUMNS FROM `jobs`
+2018-07-26 04:30:33 Debug: duration=1 rows=1 SHOW INDEXES FROM `jobs`
+2018-07-26 04:30:33 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'jobs' AND rc.TABLE_NAME = 'jobs'
+2018-07-26 04:30:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'jobs'
+2018-07-26 04:30:33 Debug: duration=2 rows=4 SHOW FULL COLUMNS FROM `job_images`
+2018-07-26 04:30:33 Debug: duration=0 rows=1 SHOW INDEXES FROM `job_images`
+2018-07-26 04:30:33 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'job_images' AND rc.TABLE_NAME = 'job_images'
+2018-07-26 04:30:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'job_images'
+2018-07-26 04:30:33 Debug: duration=2 rows=6 SHOW FULL COLUMNS FROM `bids`
+2018-07-26 04:30:33 Debug: duration=0 rows=1 SHOW INDEXES FROM `bids`
+2018-07-26 04:30:33 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'bids' AND rc.TABLE_NAME = 'bids'
+2018-07-26 04:30:33 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'bids'
+2018-07-26 04:30:33 Debug: duration=0 rows=2 SELECT Jobs.id AS `Jobs__id`, Jobs.user_id AS `Jobs__user_id`, Jobs.title AS `Jobs__title`, Jobs.urgency AS `Jobs__urgency`, Jobs.type AS `Jobs__type`, Jobs.description AS `Jobs__description`, Jobs.completed_date AS `Jobs__completed_date`, Jobs.job_type_id AS `Jobs__job_type_id`, Jobs.budget AS `Jobs__budget`, Jobs.address AS `Jobs__address`, Jobs.city AS `Jobs__city`, Jobs.state AS `Jobs__state`, Jobs.country AS `Jobs__country`, Jobs.pincode AS `Jobs__pincode`, Jobs.reason AS `Jobs__reason`, Jobs.created AS `Jobs__created`, Jobs.status AS `Jobs__status`, Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM jobs Jobs LEFT JOIN users Users ON Users.id = (Jobs.user_id) WHERE Jobs.status = 'Pending'
+2018-07-26 04:30:33 Debug: duration=0 rows=0 SELECT JobImages.id AS `JobImages__id`, JobImages.job_id AS `JobImages__job_id`, JobImages.image AS `JobImages__image`, JobImages.created AS `JobImages__created` FROM job_images JobImages WHERE JobImages.job_id in (:c0,:c1)
+2018-07-26 04:30:33 Debug: duration=0 rows=1 SELECT Bids.id AS `Bids__id`, Bids.job_id AS `Bids__job_id`, Bids.created AS `Bids__created`, Bids.amount AS `Bids__amount`, Bids.created_by AS `Bids__created_by`, Bids.status AS `Bids__status` FROM bids Bids WHERE Bids.job_id in (:c0,:c1)
+2018-07-26 04:35:44 Debug: duration=3 rows=21 SHOW FULL COLUMNS FROM `users`
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SHOW INDEXES FROM `users`
+2018-07-26 04:35:44 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'users' AND rc.TABLE_NAME = 'users'
+2018-07-26 04:35:44 Debug: duration=0 rows=1 SHOW TABLE STATUS WHERE Name = 'users'
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SELECT Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM users Users WHERE Users.email = 'randhirjha2212@gmail.com' LIMIT 1
+2018-07-26 04:35:44 Debug: duration=2 rows=17 SHOW FULL COLUMNS FROM `jobs`
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SHOW INDEXES FROM `jobs`
+2018-07-26 04:35:44 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'jobs' AND rc.TABLE_NAME = 'jobs'
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'jobs'
+2018-07-26 04:35:44 Debug: duration=2 rows=4 SHOW FULL COLUMNS FROM `job_images`
+2018-07-26 04:35:44 Debug: duration=0 rows=1 SHOW INDEXES FROM `job_images`
+2018-07-26 04:35:44 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'job_images' AND rc.TABLE_NAME = 'job_images'
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'job_images'
+2018-07-26 04:35:44 Debug: duration=2 rows=6 SHOW FULL COLUMNS FROM `bids`
+2018-07-26 04:35:44 Debug: duration=0 rows=1 SHOW INDEXES FROM `bids`
+2018-07-26 04:35:44 Debug: duration=3 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'bids' AND rc.TABLE_NAME = 'bids'
+2018-07-26 04:35:44 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'bids'
+2018-07-26 04:35:44 Debug: duration=1 rows=2 SELECT Jobs.id AS `Jobs__id`, Jobs.user_id AS `Jobs__user_id`, Jobs.title AS `Jobs__title`, Jobs.urgency AS `Jobs__urgency`, Jobs.type AS `Jobs__type`, Jobs.description AS `Jobs__description`, Jobs.completed_date AS `Jobs__completed_date`, Jobs.job_type_id AS `Jobs__job_type_id`, Jobs.budget AS `Jobs__budget`, Jobs.address AS `Jobs__address`, Jobs.city AS `Jobs__city`, Jobs.state AS `Jobs__state`, Jobs.country AS `Jobs__country`, Jobs.pincode AS `Jobs__pincode`, Jobs.reason AS `Jobs__reason`, Jobs.created AS `Jobs__created`, Jobs.status AS `Jobs__status`, Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM jobs Jobs LEFT JOIN users Users ON Users.id = (Jobs.user_id) WHERE Jobs.status = 'Pending'
+2018-07-26 04:35:44 Debug: duration=1 rows=0 SELECT JobImages.id AS `JobImages__id`, JobImages.job_id AS `JobImages__job_id`, JobImages.image AS `JobImages__image`, JobImages.created AS `JobImages__created` FROM job_images JobImages WHERE JobImages.job_id in (:c0,:c1)
+2018-07-26 04:35:44 Debug: duration=0 rows=1 SELECT Bids.id AS `Bids__id`, Bids.job_id AS `Bids__job_id`, Bids.created AS `Bids__created`, Bids.amount AS `Bids__amount`, Bids.created_by AS `Bids__created_by`, Bids.status AS `Bids__status` FROM bids Bids WHERE Bids.job_id in (:c0,:c1)
+2018-07-26 04:40:47 Debug: duration=0 rows=21 SHOW FULL COLUMNS FROM `users`
+2018-07-26 04:40:47 Debug: duration=0 rows=1 SHOW INDEXES FROM `users`
+2018-07-26 04:40:47 Debug: duration=0 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'users' AND rc.TABLE_NAME = 'users'
+2018-07-26 04:40:47 Debug: duration=0 rows=1 SHOW TABLE STATUS WHERE Name = 'users'
+2018-07-26 04:40:47 Debug: duration=0 rows=1 SELECT Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM users Users WHERE Users.email = 'randhirjha2212@gmail.com' LIMIT 1
+2018-07-26 04:40:47 Debug: duration=0 rows=6 SHOW FULL COLUMNS FROM `bids`
+2018-07-26 04:40:47 Debug: duration=0 rows=1 SHOW INDEXES FROM `bids`
+2018-07-26 04:40:47 Debug: duration=0 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'bids' AND rc.TABLE_NAME = 'bids'
+2018-07-26 04:40:47 Debug: duration=0 rows=1 SHOW TABLE STATUS WHERE Name = 'bids'
+2018-07-26 04:40:47 Debug: duration=0 rows=0 BEGIN
+2018-07-26 04:40:47 Debug: duration=17 rows=1 INSERT INTO bids (job_id, created, amount) VALUES (1, '2018-07-26 04:40:47', 54)
+2018-07-26 04:40:47 Debug: duration=0 rows=0 COMMIT
+2018-07-26 04:43:05 Debug: duration=3 rows=21 SHOW FULL COLUMNS FROM `users`
+2018-07-26 04:43:05 Debug: duration=1 rows=1 SHOW INDEXES FROM `users`
+2018-07-26 04:43:05 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'users' AND rc.TABLE_NAME = 'users'
+2018-07-26 04:43:05 Debug: duration=1 rows=1 SHOW TABLE STATUS WHERE Name = 'users'
+2018-07-26 04:43:05 Debug: duration=3 rows=1 SELECT Users.id AS `Users__id`, Users.name AS `Users__name`, Users.username AS `Users__username`, Users.phone_number AS `Users__phone_number`, Users.email AS `Users__email`, Users.password AS `Users__password`, Users.type AS `Users__type`, Users.company_name AS `Users__company_name`, Users.access_token AS `Users__access_token`, Users.profile_pic AS `Users__profile_pic`, Users.address AS `Users__address`, Users.city AS `Users__city`, Users.state AS `Users__state`, Users.pincode AS `Users__pincode`, Users.country AS `Users__country`, Users.fcm_token AS `Users__fcm_token`, Users.all_push_notification AS `Users__all_push_notification`, Users.notification_ping_by_urgency AS `Users__notification_ping_by_urgency`, Users.verification_code AS `Users__verification_code`, Users.created AS `Users__created`, Users.status AS `Users__status` FROM users Users WHERE Users.email = 'randhirjha2212@gmail.com' LIMIT 1
+2018-07-26 04:43:05 Debug: duration=2 rows=6 SHOW FULL COLUMNS FROM `bids`
+2018-07-26 04:43:05 Debug: duration=0 rows=1 SHOW INDEXES FROM `bids`
+2018-07-26 04:43:05 Debug: duration=2 rows=0 SELECT * FROM information_schema.key_column_usage AS kcu
+            INNER JOIN information_schema.referential_constraints AS rc
+            ON (
+                kcu.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+                AND kcu.CONSTRAINT_SCHEMA = rc.CONSTRAINT_SCHEMA
+            )
+            WHERE kcu.TABLE_SCHEMA = 'quick_fix' AND kcu.TABLE_NAME = 'bids' AND rc.TABLE_NAME = 'bids'
+2018-07-26 04:43:05 Debug: duration=0 rows=1 SHOW TABLE STATUS WHERE Name = 'bids'
+2018-07-26 04:43:05 Debug: duration=0 rows=0 BEGIN
+2018-07-26 04:43:05 Debug: duration=19 rows=1 INSERT INTO bids (job_id, created, amount, created_by) VALUES (1, '2018-07-26 04:43:05', 60, 1)
+2018-07-26 04:43:05 Debug: duration=0 rows=0 COMMIT

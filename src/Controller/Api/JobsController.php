@@ -203,6 +203,32 @@ class JobsController extends AppController
 					'_serialize' => ['error_code','error_message','result']]);
 	}
 
+	public function createBid(){
+		$error_code = 1;
+		$error_message = "This is post method";
+		$result = [];
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$data = $this->request->data;
+			$required['job_id'] = isset($data['job_id'])?$data['job_id']:'';
+			$required['amount'] = isset($data['amount'])?$data['amount']:'';
+			$blank_field = $this->__require_fields($required);
+		    if (count($blank_field)>0){
+		        $error_message = 'Please enter required field.';
+		    }else{
+				$JobImagesTable = TableRegistry::get('Bids');
+				$required['created_by'] = $this->Auth->user('id');
+				$JobImages = $JobImagesTable->newEntity();
+				$JobImages = $JobImagesTable->patchEntity($JobImages, $required);
+				$result = $JobImagesTable->save($JobImages);
+				$error_code = 0;
+				$error_message = 'Successfully.';
+			}
+		}
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					'_serialize' => ['error_code','error_message']]);
+	}
+
 	public function newRequest(){
 		$error_code = 0;
 		$error_message="Successfully";
@@ -211,12 +237,27 @@ class JobsController extends AppController
 			->where(['Jobs.status'=>'Pending'])
 			->contain(['JobImages','Bids','Users'])
 			->toArray();
-		pr($data);
 		if(count($data)>0){
 			foreach ($data as $key => $value) {
-
+				if(count($value['bids'])>0){
+					$flag = true;
+					foreach ($value['bids'] as $k => $v) {
+						if($v['created_by'] == $this->Auth->user('id')){
+							$flag = false;
+						}
+					}
+					if($flag){
+						array_push($result,$value);
+					}
+				}else{
+					array_push($result,$value);
+				}
 			}
 		}
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
 	}
 
 	public function pendingQuotesBids(){

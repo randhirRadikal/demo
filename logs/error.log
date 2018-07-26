@@ -10256,3 +10256,74 @@ Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
 
 
 
+2018-07-26 04:28:16 Warning: Warning (512): Unable to emit headers. Headers sent in file=E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Core\functions.php line=148 in [E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /GitQuickFix/api/Jobs/newRequest.json
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2018-07-26 04:28:16 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Core\functions.php:148) in [E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 146]
+Request URL: /GitQuickFix/api/Jobs/newRequest.json
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2018-07-26 04:28:16 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Core\functions.php:148) in [E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /GitQuickFix/api/Jobs/newRequest.json
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2018-07-26 04:28:16 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Core\functions.php:148) in [E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 173]
+Request URL: /GitQuickFix/api/Jobs/newRequest.json
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 173
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2018-07-26 04:40:29 Error: [Cake\Controller\Exception\MissingActionException] Action JobsController::createBid() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'JobsController',
+  'action' => 'createBid',
+  'prefix' => 'api',
+  'plugin' => NULL,
+)
+Request URL: /api/Jobs/createBid.json
+Stack Trace:
+#0 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#1 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\Api\JobsController))
+#2 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 E:\xampp\htdocs\GitQuickFix\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 E:\xampp\htdocs\GitQuickFix\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
