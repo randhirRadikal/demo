@@ -16,7 +16,7 @@ class ChatsController extends AppController
     public function index()
     {
 		$Users = [];
-		$menu = ["menu"=>"chats","menu_type"=>"chats"];
+		$menu = ["menu"=>"chats","menu_type"=>"chats","admin"=>$this->Auth->user()];
 		$this->set(compact('Users','menu'));
         $this->set('_serialize', ['Users','menu']);
     }

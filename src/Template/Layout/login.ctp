@@ -1,30 +1,11 @@
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
-Version: 4.7.1
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
-    <!--<![endif]-->
-    <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>Quick Fix</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="Preview page of Metronic Admin Theme #6 for " name="description" />
+        <meta content="" name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
@@ -52,8 +33,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <body class=" login">
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <a href="index.html">
-                <img src="<?php echo $this->Url->build('/', TRUE); ?>assets/pages/img/logo-big.png" alt="" /> </a>
+            <img src="<?php echo $this->Url->build('/', TRUE); ?>img/logo2.png" alt="logo" class="logo-default" style="margin: 16px 0px 0;" />
+			<div style="width:100%; height:100%;" >
+			    <span style="font-size:24px; color:#FFFFFF;"> QUICK FIX </span>
+			</div>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
@@ -68,16 +51,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">Username</label>
-                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="randhirjha@yopmail.com" autocomplete="off" placeholder="Username" name="email" id="email" /> </div>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text" value="" autocomplete="off" placeholder="Username" name="email" id="email" /> </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Password</label>
-                    <input class="form-control form-control-solid placeholder-no-fix" type="password" value="Randhir2@" autocomplete="off" placeholder="Password" name="password" id="password" /> </div>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="password" value="" autocomplete="off" placeholder="Password" name="password" id="password" /> </div>
                 <div class="form-actions">
                     <button type="submit" class="btn green uppercase">Login</button>
-                    <label class="rememberme check mt-checkbox mt-checkbox-outline">
-                        <input type="checkbox" name="remember" value="1" />Remember
-                        <span></span>
-                    </label>
+                    
                     <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
                 </div>
 
@@ -96,7 +76,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </form>
             <!-- END FORGOT PASSWORD FORM -->
         </div>
-        <div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
+        <div class="copyright"> 2018 © Quick Fix. </div>
         <!--[if lt IE 9]>
 <script src="../assets/global/plugins/respond.min.js"></script>
 <script src="../assets/global/plugins/excanvas.min.js"></script>

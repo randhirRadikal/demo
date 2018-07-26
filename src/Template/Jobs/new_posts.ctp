@@ -3,11 +3,36 @@
 	<!-- BEGIN PAGE HEAD-->
 	<div class="page-head">
 		<!-- BEGIN PAGE TITLE -->
-		<div class="page-title uppercase">
-			<h1>New Posted Jobs
-				<small></small>
-			</h1>
-		</div>
+		<form action="#" class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group">
+                    <div class="col-md-4">
+						<div class="form-group">
+                            <div class="col-md-12">
+                                <div class="input-icon right" >
+                                    <i class="fa fa-search" style="top:-2px;"></i>
+                                    <input type="text" class="form-control input-circle" placeholder="Search">
+								</div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-md-6">
+
+                    </div>
+					<div class="col-md-2">
+						<div class="form-group">
+	                        <select class="form-control input-circle">
+	                            <option>Job Type</option>
+	                            <option>Option 2</option>
+	                            <option>Option 3</option>
+	                            <option>Option 4</option>
+	                            <option>Option 5</option>
+	                        </select>
+	                    </div>
+                    </div>
+                </div>
+			</div>
+        </form>
 		<!-- END PAGE TITLE -->
 	</div>
 	<!-- END PAGE HEAD-->

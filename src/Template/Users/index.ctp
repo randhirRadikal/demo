@@ -60,7 +60,9 @@
 											<?= $value['status'] ?>
 										</td>
 										<td>
-											<i class="fa fa-times" style="color:red;"></i>
+											<a href="javascript:;" onclick="deleteFunction(<?= $value['id'] ?>);">
+												<i class="fa fa-times" style="color:red;"></i>
+											</a>
 										</td>
 
 									</tr>
@@ -82,3 +84,13 @@
 	<!-- END PAGE BASE CONTENT -->
 </div>
 </div>
+
+<script>
+	var urlData = "<?php echo $this->Url->build('/', TRUE); ?>";
+	var urlData = urlData+'Users/deleteOwner/';
+	function deleteFunction(id){
+		if(confirm("Are you sure you want to delete")){
+			window.location = urlData+id;
+		}
+	}
+</script>

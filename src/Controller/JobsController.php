@@ -15,34 +15,45 @@ class JobsController extends AppController
     public function index()
     {
         $users = $this->paginate($this->Jobs);
-		$menu = ["menu"=>"cancelled_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"cancelled_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
         $this->set(compact('users','menu'));
         $this->set('_serialize', ['users','menu']);
     }
 
     public function newPosts($id = null)
     {
-		$JobTemp = $this->Jobs->find('all')
-			->where(['Jobs.status'=>'Pending'])
-			->contain(['Bids','Users'])
-			->toArray();
 		$Jobs = [];
-		foreach ($JobTemp as $key => $value) {
-			if(count($value['bids'])==0){
-				array_push($Jobs,$value);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+
+		}else{
+			$JobTemp = $this->Jobs->find('all')
+				->where(['Jobs.status'=>'Pending'])
+				->contain(['Bids','Users'])
+				->toArray();
+
+			foreach ($JobTemp as $key => $value) {
+				if(count($value['bids'])==0){
+					array_push($Jobs,$value);
+				}
 			}
 		}
-		$menu = ["menu"=>"newposted_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"newposted_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
     }
 
 	public function jobYet(){
-        $Jobs = $this->Jobs->find('all')
+        $JobTemp = $this->Jobs->find('all')
 			->where(['Jobs.status'=>'Pending'])
 			->contain(['Bids','Users'])
 			->toArray();
-		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job"];
+		$Jobs = [];
+		foreach ($JobTemp as $key => $value) {
+			if(count($value['bids'])){
+				array_push($Jobs,$value);
+			}
+		}
+		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
     }
@@ -72,7 +83,7 @@ class JobsController extends AppController
 		$Bids['lastJob'] = $this->Jobs->find('all')->contain(['Bids'])->order(['Jobs.id'=>'DESC'])->first();
 		// pr($lowestBidValue);
 		// exit;
-		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"jobyet_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','Bids','menu'));
         $this->set('_serialize', ['Jobs','Bids','menu']);
 	}
@@ -100,7 +111,7 @@ class JobsController extends AppController
 				]
 			],'Users'])
 			->toArray();
-		$menu = ["menu"=>"pending_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"pending_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
     }
@@ -139,7 +150,7 @@ class JobsController extends AppController
 		// pr($Jobs);
 		// exit;
 
-		$menu = ["menu"=>"compaleted_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"compaleted_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
     }
@@ -149,7 +160,7 @@ class JobsController extends AppController
 		$Jobs = $this->Jobs->find('all')->where(['Jobs.status'=>'Cancelled'])->contain(['Bids'=>['Users'],'Users'])->toArray();
 
 
-		$menu = ["menu"=>"cancelled_jobs","menu_type"=>"job"];
+		$menu = ["menu"=>"cancelled_jobs","menu_type"=>"job","admin"=>$this->Auth->user()];
 		$this->set(compact('Jobs','menu'));
         $this->set('_serialize', ['Jobs','menu']);
     }

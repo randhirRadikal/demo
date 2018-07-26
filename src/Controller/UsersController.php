@@ -22,12 +22,12 @@ class UsersController extends AppController
 			$Users[$key]['jobs_cancelled']=$jobsTable->find('all')->where(['user_id'=>$value['id'],'status'=>'Cancelled'])->count();
 			$Users[$key]['jobs_posted']=$jobsTable->find('all')->where(['user_id'=>$value['id']])->count();
 		}
-		$menu = ["menu"=>"homeowner","menu_type"=>"manpower"];
+		$menu = ["menu"=>"homeowner","menu_type"=>"manpower","admin"=>$this->Auth->user()];
 		$this->set(compact('Users','menu'));
         $this->set('_serialize', ['Users','menu']);
     }
 
-    public function contractors($id = null)
+    public function contractors()
     {
 		$Users = $this->Users->find('all')->where(['Users.type'=>'Contractor'])->toArray();
 		$jobsTable = TableRegistry::get('Jobs');
@@ -36,7 +36,21 @@ class UsersController extends AppController
 			$Users[$key]['jobs_cancelled']=$jobsTable->find('all')->where(['user_id'=>$value['id'],'status'=>'Cancelled'])->count();
 			$Users[$key]['jobs_posted']=$jobsTable->find('all')->where(['user_id'=>$value['id']])->count();
 		}
-		$menu = ["menu"=>"contractors","menu_type"=>"manpower"];
+		$menu = ["menu"=>"contractors","menu_type"=>"manpower","admin"=>$this->Auth->user()];
+		$this->set(compact('Users','menu'));
+        $this->set('_serialize', ['Users','menu']);
+    }
+
+	public function premiumContractors()
+    {
+		$Users = $this->Users->find('all')->where(['Users.type'=>'PremiumContractor'])->toArray();
+		$jobsTable = TableRegistry::get('Jobs');
+		foreach ($Users as $key => $value) {
+			$Users[$key]['jobs_completed']=$jobsTable->find('all')->where(['user_id'=>$value['id'],'status'=>'Completed'])->count();
+			$Users[$key]['jobs_cancelled']=$jobsTable->find('all')->where(['user_id'=>$value['id'],'status'=>'Cancelled'])->count();
+			$Users[$key]['jobs_posted']=$jobsTable->find('all')->where(['user_id'=>$value['id']])->count();
+		}
+		$menu = ["menu"=>"premium_contractors","menu_type"=>"manpower","admin"=>$this->Auth->user()];
 		$this->set(compact('Users','menu'));
         $this->set('_serialize', ['Users','menu']);
     }
@@ -67,9 +81,39 @@ class UsersController extends AppController
 
 		// pr($Users);
 		// exit;
-		$menu = ["menu"=>"","menu_type"=>"overview"];
+		$menu = ["menu"=>"","menu_type"=>"overview","admin"=>$this->Auth->user()];
 		$this->set(compact('Users','menu'));
         $this->set('_serialize', ['Users','menu']);
+	}
+
+	public function deleteOwner($id=null){
+		$user = $this->Users->get($id);
+		if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
+        } else {
+            $this->Flash->error(__('The user could not be deleted. Please, try again..'));
+        }
+		return $this->redirect(['action' => 'index']);
+	}
+
+	public function deletePremium($id=null){
+		$user = $this->Users->get($id);
+		if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
+        } else {
+            $this->Flash->error(__('The user could not be deleted. Please, try again..'));
+        }
+		return $this->redirect(['action' => 'premiumContractors']);
+	}
+
+	public function deleteContractors($id=null){
+		$user = $this->Users->get($id);
+		if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
+        } else {
+            $this->Flash->error(__('The user could not be deleted. Please, try again..'));
+        }
+		return $this->redirect(['action' => 'contractors']);
 	}
 
     public function login()
@@ -104,4 +148,5 @@ class UsersController extends AppController
         $this->Flash->success(__('Logout successfully.'));
         return $this->redirect(['action' => 'login']);
     }
+
 }

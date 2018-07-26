@@ -5,7 +5,7 @@
 		<title>QuickFix Admin</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
-		<meta content="Preview page of Metronic Admin Theme #4 for managed datatable samples" name="description" />
+		<meta content="" name="description" />
 		<meta content="" name="author" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
@@ -44,7 +44,11 @@
 				<!-- BEGIN LOGO -->
 				<div class="page-logo">
 					<a href="<?php echo $this->Url->build('/', TRUE); ?>jobs/newPosts">
-						<img src="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/img/logo-light.png" alt="logo" class="logo-default" /> </a>
+						<img src="<?php echo $this->Url->build('/', TRUE); ?>img/logo.png" alt="logo" class="logo-default" style="margin: 16px 0px 0;" />
+						<div style="width:100%; height:100%;  margin-top: -38px; margin-left: 46px;" >
+						    <span style="font-size:24px; color:#FFFFFF;"> QUICK FIX </span>
+						</div>
+					</a>
 						<div class="menu-toggler sidebar-toggler">
 							<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 						</div>
@@ -88,9 +92,15 @@
 								</li>
 								<li class="dropdown dropdown-user dropdown-dark">
 									<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-										<span class="username username-hide-on-mobile"> Nick </span>
+										<span class="username username-hide-on-mobile"> <?php echo $menu['admin']['name']; ?> </span>
 										<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-										<img alt="" class="img-circle" src="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/img/avatar9.jpg" /> </a>
+										<?php if($menu['admin']['profile_pic']){ ?>
+											<img alt="" class="img-circle" src="<?php echo $this->Url->build('/', TRUE); ?>img/admins/<?php echo $menu['admin']['profile_pic']; ?>" />
+
+										<?php }else{ ?>
+											<img alt="" class="img-circle" src="<?php echo $this->Url->build('/', TRUE); ?>assets/layouts/layout4/img/avatar9.jpg" />
+										<?php } ?>
+									</a>
 										<ul class="dropdown-menu dropdown-menu-default">
 											<li>
 												<a href="<?php echo $this->Url->build('/', TRUE); ?>admins/view">
@@ -180,8 +190,8 @@
 													<span class="title">Existing Contractors</span>
 												</a>
 											</li>
-											<li class="nav-item start <?= ($menu['menu']=="premium")?"active":""; ?> ">
-												<a href="<?php echo $this->Url->build('/', TRUE); ?>users/index" class="nav-link ">
+											<li class="nav-item start <?= ($menu['menu']=="premium_contractors")?"active":""; ?> ">
+												<a href="<?php echo $this->Url->build('/', TRUE); ?>users/premiumContractors" class="nav-link ">
 
 													<span class="title">Existing Premium Contractors</span>
 												</a>
@@ -208,7 +218,7 @@
 						<!-- END CONTAINER -->
 						<!-- BEGIN FOOTER -->
 						<div class="page-footer">
-							<div class="page-footer-inner"> 2016 &copy; By Randhir Jha
+							<div class="page-footer-inner"> 2018 &copy; By Quick Fix
 
 							</div>
 							<div class="scroll-to-top">

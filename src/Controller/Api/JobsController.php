@@ -38,17 +38,27 @@ class JobsController extends AppController
 			$required['title'] = isset($data['title'])?$data['title']:'';
 			$required['description'] = isset($data['description'])?$data['description']:'';
 			$required['budget'] = isset($data['budget'])?$data['budget']:'';
-			$required['type'] = isset($data['type'])?$data['type']:'';
-			$data['user_id'] = $this->Auth->user('id');
+			$required['state'] = isset($data['administrativeArea'])?$data['administrativeArea']:'';
+			$required['country'] = isset($data['countryName'])?$data['countryName']:'';
+			$required['address'] = isset($data['thoroughfare'])?$data['thoroughfare']:'';
+			$required['city'] = isset($data['locality'])?$data['locality']:'';
+			$required['pincode'] = isset($data['postalCode'])?$data['postalCode']:'';
+			$required['urgency'] = isset($data['urgency'])?$data['urgency']:'';
 			$blank_field = $this->__require_fields($required);
 	    if (count($blank_field)>0){
 	        $error_message = 'Please enter required field.';
 	    }else{
-				$job = $this->Jobs->newEntity();
-				$job = $this->Jobs->patchEntity($job, $data);
-				$result['job_id'] = $this->Jobs->save($job)->id;
-				$error_code = 0;
-				$error_message = 'Successfully.';
+			$jobTypeTable = TableRegistry::get('JobTypes');
+			$jobType = $jobTypeTable->find('all')->where(['id'=>$required['job_type_id']])->first();
+
+			$required['type'] = $jobType->name;
+			$required['status'] = "Pending";
+			$required['user_id'] = $this->Auth->user('id');
+			$job = $this->Jobs->newEntity();
+			$job = $this->Jobs->patchEntity($job, $required);
+			$result['job_id'] = $this->Jobs->save($job)->id;
+			$error_code = 0;
+			$error_message = 'Successfully.';
 			}
 		}
 		$this->set(["error_code"=>$error_code,
@@ -70,6 +80,10 @@ class JobsController extends AppController
 	        $error_message = 'Please enter required field.';
 	    }else{
 				$JobImagesTable = TableRegistry::get('JobImages');
+				$arr = explode(',',$data['image']);
+				$data['image'] = md5($data['job_id'].time().uniqid()).".png";
+				$decode = base64_decode($arr[1]);
+				file_put_contents("img/jobs/".$data['image'],$decode);
 				$JobImages = $JobImagesTable->newEntity();
 				$JobImages = $JobImagesTable->patchEntity($JobImages, $data);
 				$result = $JobImagesTable->save($JobImages);
@@ -107,7 +121,6 @@ class JobsController extends AppController
 				}else{
 					 $error_message = "The user could not be saved, Please, try again.";
 				}
-
 			}
 		}
 		$this->set(["error_code"=>$error_code,
@@ -160,6 +173,50 @@ class JobsController extends AppController
 					"error_message"=>$error_message,
 					"result"=>$result,
 					'_serialize' => ['error_code','error_message','result']]);
+	}
+
+	public function pendingRequest(){
+		$error_code = 0;
+		$error_message="Successfully";
+		$bidsTable = TableRegistry::get('Bids');
+		$result = $bidsTable->find('all')
+			->where(['Bids.created_by'=>$this->Auth->user('id'),'Bids.status'=>'Pending'])
+			->contain(['Jobs'=>['JobImages','Users'=>[
+				'fields' => [
+					'Users.id',
+					'Users.name'
+				]]]])
+			->toArray();
+		if(count($result)>0){
+			foreach ($result as $key => $value) {
+				$data = $bidsTable->find('all')->where(['Bids.job_id'=>$value->job->id,'Bids.status'=>'Approved'])->first();
+				if($data){
+					$result[$key]['bidsStatus'] = 'lost';
+				}else{
+					$result[$key]['bidsStatus'] = 'bided';
+				}
+			}
+		}
+		$this->set(["error_code"=>$error_code,
+					"error_message"=>$error_message,
+					"result"=>$result,
+					'_serialize' => ['error_code','error_message','result']]);
+	}
+
+	public function newRequest(){
+		$error_code = 0;
+		$error_message="Successfully";
+		$result = [];
+		$data = $this->Jobs->find('all')
+			->where(['Jobs.status'=>'Pending'])
+			->contain(['JobImages','Bids','Users'])
+			->toArray();
+		pr($data);
+		if(count($data)>0){
+			foreach ($data as $key => $value) {
+
+			}
+		}
 	}
 
 	public function pendingQuotesBids(){

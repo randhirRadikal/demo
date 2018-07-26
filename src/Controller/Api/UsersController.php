@@ -164,6 +164,12 @@ class UsersController extends AppController
 				$error_message = 'Please enter required field.';
 			}else{
 				$user = $this->Users->get($required['id']);
+				if(isset($data['image'])){
+					$arr = explode(',',$data['image']);
+					$required['profile_pic'] = md5($data['job_id'].time().uniqid()).".png";
+					$decode = base64_decode($arr[1]);
+					file_put_contents("img/users/".$required['profile_pic'],$decode);
+				}
 				$user = $this->Users->patchEntity($user, $required);
 				if ($this->Users->save($user)) {
 					$error_code = 0;
